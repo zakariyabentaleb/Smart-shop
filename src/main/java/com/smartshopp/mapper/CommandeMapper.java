@@ -1,4 +1,13 @@
 package com.smartshopp.mapper;
 
-public class CommandeMapper {
+import com.smartshopp.dto.CommandeDTO;
+import com.smartshopp.dto.ProductDTO;
+import com.smartshopp.model.Commande;
+import com.smartshopp.model.Product;
+import org.mapstruct.Mapper;
+
+@Mapper(componentModel = "spring")
+public interface CommandeMapper {
+        CommandeDTO toDTO(Commande commande);
+        Commande toEntity(CommandeDTO commandeDTO);
 }

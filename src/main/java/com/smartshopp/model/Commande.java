@@ -28,6 +28,9 @@ public class Commande {
     @OneToMany(mappedBy = "commande", cascade = CascadeType.ALL)
     private List<CommandeLigne> lignes;
 
+    @OneToMany(mappedBy = "commande", cascade = CascadeType.ALL)
+    private List<Payment> paiements;
+
     private LocalDate date;
 
     private double sousTotal;
@@ -39,4 +42,5 @@ public class Commande {
 
     @Enumerated(EnumType.STRING)
     private StatutCommande statut;
+
 }

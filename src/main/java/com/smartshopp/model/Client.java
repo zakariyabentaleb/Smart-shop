@@ -4,6 +4,8 @@ import com.smartshopp.enums.CustomerTier;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -25,7 +27,13 @@ public class Client {
     @Enumerated(EnumType.STRING)
     private CustomerTier niveauFidelite = CustomerTier.BASIC;
 
-    @OneToOne
+    private Integer totalOrders = 0;
+    private BigDecimal totalSpent = BigDecimal.ZERO;
+
+    private LocalDate firstOrderDate;
+    private LocalDate lastOrderDate;
+
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User user;
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
