@@ -15,16 +15,16 @@ public class CommandeDTO {
     private Long clientId; // id du client
     private LocalDateTime dateCreation;
 
-    private double sousTotal;
-    private double remise;
-    private double montantHTApresRemise;
-    private double tva;
-    private double total;
+    private Double sousTotal;
+    private Double remise;
+    private Double montantHTApresRemise;
+    private Double tva;
+    private Double total;
 
     private String codePromo;
     private String statut; // PENDING, CONFIRMED, CANCELED, REJECTED
 
-    private double montantRestant;
+    private Double montantRestant;
 
     private List<CommandeLigneDTO> lignes;
 }

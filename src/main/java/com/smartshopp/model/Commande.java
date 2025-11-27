@@ -25,6 +25,10 @@ public class Commande {
     @JoinColumn(name = "client_id")
     private Client client;
 
+    @ManyToOne
+    @JoinColumn(name = "promo_code_id")
+    private PromoCode promoCode;
+
     @OneToMany(mappedBy = "commande", cascade = CascadeType.ALL)
     private List<CommandeLigne> lignes;
 

@@ -11,7 +11,7 @@ public class CommandeLigneDTO {
     private Long id;
     private Long produitId;
     private String produitNom;
-    private int quantite;
-    private double prixUnitaire;
-    private double totalLigne;
+    private Integer quantite;
+    private Double prixUnitaire;
+    private Double totalLigne;
 }
