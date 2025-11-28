@@ -93,6 +93,14 @@ public class ClientService {
         return clientMapper.toDTO(savedClient);
     }
 
+    @Transactional
+    public ClientDTO clientProfile(Long clientId) {
+        Client client = clientRepository.findById(clientId).orElseThrow(
+                () -> new RuntimeException("Aucun Client avec id: " + clientId)
+        );
+        return clientMapper.toDTO(client);
+    }
+
     public void deleteClient(Long clientId){
         clientRepository.deleteById(clientId);
     }

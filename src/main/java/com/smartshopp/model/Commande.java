@@ -42,9 +42,14 @@ public class Commande {
     private double tva;
     private double total;
 
+    // montant restant (payable)
+    private Double montantRestant;
+
+
     private String codePromo;
 
     @Enumerated(EnumType.STRING)
     private StatutCommande statut;
 
 }
+

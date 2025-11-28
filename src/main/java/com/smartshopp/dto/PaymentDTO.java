@@ -13,8 +13,8 @@ import java.time.LocalDateTime;
 public class PaymentDTO {
     private Long id;
     private Long commandeId;
-    private int numeroPaiement;
-    private double montant;
+    private Integer numeroPaiement;
+    private Double montant;
     private String typePaiement;
     private String statut;
     private LocalDateTime datePaiement;
