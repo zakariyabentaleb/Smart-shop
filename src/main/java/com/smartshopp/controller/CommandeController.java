@@ -82,4 +82,15 @@ public class CommandeController {
 
         return ResponseEntity.ok(history);
     }
+    @PutMapping("{id}/confirm")
+    public ResponseEntity<CommandeDTO> confirmOrderAfterPayment(
+            @PathVariable("id") Long id,
+            HttpServletRequest request
+    ){
+        AdminChecker.checkAdminAccess(request);
+
+        CommandeDTO responseDTO = commandeService.confirmOrderAfterCompletingPayment(id);
+
+        return ResponseEntity.ok(responseDTO);
+    }
 }

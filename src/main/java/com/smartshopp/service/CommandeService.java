@@ -3,6 +3,7 @@ package com.smartshopp.service;
 import com.smartshopp.dto.CommandeDTO;
 import com.smartshopp.dto.CommandeLigneDTO;
 import com.smartshopp.enums.CustomerTier;
+import com.smartshopp.enums.StatutCommande;
 import com.smartshopp.exception.ResourceNotFoundException;
 import com.smartshopp.mapper.CommandeMapper;
 import com.smartshopp.model.*;
@@ -27,6 +28,7 @@ public class CommandeService {
     private final CommandeMapper orderMapper;
     private final ProductRepository productRepository;
     private final ClientRepository clientRepository;
+    private final ClientService clientService;
     private final PromoCodeRepository promoCodeRepository;
 
     @Transactional
@@ -150,5 +152,22 @@ public class CommandeService {
             return 15;
         }
         return 0;
+    }
+    @Transactional
+    public CommandeDTO confirmOrderAfterCompletingPayment(Long orderId){
+        Commande commande = orderRepository.findById(orderId).orElseThrow(
+                () -> new ResourceNotFoundException("aucun order avec id : "+orderId)
+        );
+
+        Double montantRestant = commande.getMontantRestant();
+        if(montantRestant != null && montantRestant != 0){
+            throw new RuntimeException("can't confirme order, because it is not full paid");
+        }
+
+        commande.setStatut(StatutCommande.CONFIRMED);
+        clientService.updateClientStatistics(commande.getClient().getId());
+        Commande savedCommande = orderRepository.save(commande);
+
+        return orderMapper.toDTO(savedCommande);
     }
 }
