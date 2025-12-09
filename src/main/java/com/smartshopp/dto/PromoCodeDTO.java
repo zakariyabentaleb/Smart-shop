@@ -1,7 +1,5 @@
 package com.smartshopp.dto;
 
-
-
 import lombok.*;
 
 @Data

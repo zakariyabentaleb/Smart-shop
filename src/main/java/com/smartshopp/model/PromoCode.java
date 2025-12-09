@@ -20,7 +20,10 @@ public class PromoCode {
     private String id;
 
     private String code;
-    private double percentage_remise;
+
+    @Column(name = "percentage_remise")
+    private double percentageRemise;
+
     private boolean active;
     private LocalDate createdAt = LocalDate.now();
 

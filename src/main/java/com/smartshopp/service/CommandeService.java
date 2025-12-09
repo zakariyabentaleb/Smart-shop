@@ -40,15 +40,13 @@ public class CommandeService {
         );
 
         double promoCode = 0;
-        PromoCode promoc = null;
 
         if(dto.getCodePromo() != null){
             PromoCode pc = promoCodeRepository.findPromoCodeByCode(dto.getCodePromo()).orElseThrow(() ->
                     new ResourceNotFoundException("Aucun promo code avec code: "+dto.getCodePromo())
             );
-            promoc = pc;
             if(pc.isActive()){
-                promoCode = pc.getPercentage_remise();
+                promoCode = pc.getPercentageRemise();
             }else{
                 throw new RuntimeException("promo code is expired! try another one!");
             }
@@ -64,6 +62,7 @@ public class CommandeService {
                 );
 
                 if(item.getQuantite() > product.getStockDisponible()){
+                    order.setStatut(StatutCommande.REJECTED);
                     throw new RuntimeException("Quantity est plus élevé que nos stock disponible!");
                 }
 
